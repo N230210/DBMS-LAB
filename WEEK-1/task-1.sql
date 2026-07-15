@@ -11,7 +11,7 @@ CREATE TABLE Taxpayer(
     is_active BOOLEAN );
 INSERT INTO Taxpayer(taxpayer_id,pan_number,full_name,date_of_birth,occupation,annual_income,email,is_active)
 VALUES
-(101,'ABCDE1234','Ravi Kumar','1995-06-15','Software Engineer',850000.00,'ravi.kumar@eexample.com',TRUE),
+(101,'ABCDE1234F','Ravi Kumar','1995-06-15','Software Engineer',850000.00,'ravi.kumar@eexample.com',TRUE),
 (102,'BCDEF2345G','Priya Sharma','1992-11-22','Doctor',120000.00,'priya.sharma@example.com',TRUE),
 (103,'CDEFG3456H','Arjun Reddy','1988-03-10','Business Owner',1800000.00,'arjun.reddy@example.com',TRUE),
 (104,'DEFGH4567J','Sneha Patel','1998-08-05','Teacher',620000.00,'sneha.patel@example',TRUE),
@@ -19,7 +19,7 @@ VALUES
 (106,'FGHJK6789L','meera singh','1985-12-30','consultant',150000.00,'meera.singh@example.com',FALSE);
 SELECT * FROM Taxpayer;
 INSERT INTO Taxpayer()
-VALUES(107,'AJHGF','Divya','2008-04-04','jhgf',78656,'div@gmail.com',TRUE);
+VALUES(107,'AJHGF','Divya','2008-04-04','Bussiness Owner',78656.00,'div@gmail.com',TRUE);
 UPDATE Taxpayer
 SET annual_income=950000.00
 WHERE taxpayer_id='101';
@@ -37,20 +37,22 @@ ALTER TABLE Taxpayer
 MODIFY occupation VARCHAR(100)
 INSERT INTO Taxpayer()
 VALUES
-(101,'ijhb','hggbn','1999-09-09','jhg',785767.00,'uh@.com',TRUE);
+(101,'ijhb','hggbn','1999-09-09','Professor',785767.00,'uh@.com',TRUE);
+/*the error occured because there we already had 101 taxpayer_id*/
 INSERT INTO Taxpayer()
-VALUES(89,'ABCDE1234F','kjhgvc','1997-01-02','uhyg',788888.00,'ghj@.com',TRUE);
+VALUES(89,'ABCDE1234F','kjhgvc','1997-01-02','Lecturer',788888.00,'ghj@.com',TRUE);
+/*the error occured because there we already had ABCDE1234F pan_number*/
 INSERT INTO Taxpayer()
 VALUES(199,'ABCDE1234F','1997-01-02','uhyg',788888.00,'ghj@.com',TRUE);
-
+/*the error occured because we used NOT NULL constaint*/
 
 USE taxation_db;
-CREATE TABLE Incomecategory(
+CREATE TABLE Income_Category(
 	category_id INT PRIMARY KEY,
     category_name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(200) NOT NULL,
     taxable BOOLEAN NOT NULL);
-INSERT INTO Incomecategory(category_id,category_name,description,taxable)
+INSERT INTO Income_Category(category_id,category_name,description,taxable)
 VALUES
 (1,'salary','income received from emplyment',TRUE),
 (2,'business','income earned from business activities',TRUE),
@@ -58,10 +60,11 @@ VALUES
 (4,'capital gains','income from transfer of eligible assets',TRUE),
 (5,'other sources','income such as bank intrest',TRUE),
 (6,'agricultural income','income from eligible agricultural aactivities',FALSE);
-SELECT * FROM Incomecategory;
-INSERT INTO Incomecategory()
+SELECT * FROM Income_Category;
+INSERT INTO Income_Category()
 VALUES(7,'Rental Income','Income received from rental',TRUE);
 
+USE taxation_db;
 CREATE TABLE Financial_Year(
 	year_id INT PRIMARY KEY,
     year_label VARCHAR(9) NOT NULL UNIQUE,
